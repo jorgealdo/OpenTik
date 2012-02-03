@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<system>
+	<config>
+		<dhcp>
+			<domainname>teste.org.br</domainname>
+			<dnsservers>
+				<dnsserver>192.168.1.1</dnsserver>
+				<dnsserver>192.168.1.2</dnsserver>
+			</dnsservers>
+			<defaultleasetime>600</defaultleasetime>
+			<maxleasetime>900</maxleasetime>
+			<isauthoritative>true</isauthoritative>
+			<ddnsupdatestyle>ad-hoc</ddnsupdatestyle>
+			<logfacility>local7</logfacility>
+			<subnets>
+				<subnet>
+					<name>teste</name>
+					<netmask>255.255.255.0</netmask>
+					<rangestart>192.168.1.10</rangestart>
+					<rangeend>192.168.1.254</rangeend>
+					<router>192.168.1.1</router>
+				</subnet>
+			</subnets>
+			<hosts>
+				<host>
+					<hostname>teste</hostname>
+					<ethernetaddress>00:00:00:00:00:00</ethernetaddress>
+					<fixedip>192.168.1.9</fixedip>
+				</host>
+			</hosts>
+		</dhcp>
+	</config>
+</system>
