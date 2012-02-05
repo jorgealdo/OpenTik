@@ -80,9 +80,11 @@ Type
 	TNumberLiteralNode = Class(TExprNode)
 	Private
 		fValue : Variant;
+		fIsFloat : Boolean;
 	Public
 		Procedure Evaluate; Override;
 		Property Value : Variant Read fValue Write fValue;
+		Property IsFloat : Boolean Read fIsFloat Write fIsFloat;
 	End;
 
 	TMulExpressionNode = Class(TExprNode)
@@ -216,7 +218,10 @@ End;
 Procedure TNumberLiteralNode.Evaluate;
 Begin
 	// Debug  WriteLn(Self.ClassName);
-	Stack.Top.Push(fValue);
+	If fIsFloat Then
+		Stack.Top.Push(StrToFloat(fValue))
+	Else
+		Stack.Top.Push(StrToInt(fValue));
 End;
 
 { TMulExpressionNode }

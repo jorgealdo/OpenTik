@@ -67,6 +67,7 @@ Type
 		tkExprIdentifier,
 		tkExprLiteralString,
 		tkExprLiteralNumber,
+		tkExprLiteralFloat,
 		tkExprWord,
 		tkExprEOF
 	);
@@ -346,8 +347,10 @@ Begin
 			lLiteral := lLiteral + fSource.Next;
 			fSource.SoftGetNext;
 		End;
-	End;
-	AppendToOutput(lLiteral, tkExprLiteralNumber);
+		AppendToOutput(lLiteral, tkExprLiteralFloat);
+	End
+	Else
+		AppendToOutput(lLiteral, tkExprLiteralNumber);
 End;
 
 Procedure TExprScanner.ScanPunct;

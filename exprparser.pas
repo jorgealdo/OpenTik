@@ -42,6 +42,7 @@ Type
 		Function ParseFunctionCall(Const aPrevious : TExprNode): TExprNode;
 		Function ParseStringLiteral(Const aPrevious : TExprNode): TExprNode;
 		Function ParseNumberLiteral(Const aPrevious : TExprNode): TExprNode;
+		Function ParseFloatLiteral(Const aPrevious : TExprNode): TExprNode;
 		Function ParseLiteral(Const aPrevious : TExprNode): TExprNode;
 		Function ParseTerm(Const aPrevious : TExprNode): TExprNode;
 		Function ParseMulExpression(Const aPrevious : TExprNode): TExprNode;
@@ -137,6 +138,20 @@ Var
 Begin
 	// Debug WriteLn('ParseNumberLiteral');
 	lNumberLiteral := TNumberLiteralNode.Create(aPrevious);
+	lNumberLiteral.IsFloat := False;
+	Mark(lNumberLiteral);
+	lNumberLiteral.Value := fSource.Extract(tkExprLiteralNumber);
+	// Debug WriteLn(lNumberLiteral.Value);
+	Result := lNumberLiteral;
+End;
+
+Function TExprParser.ParseNumberLiteral(Const aPrevious : TExprNode): TExprNode;
+Var
+	lNumberLiteral : TNumberLiteralNode;
+Begin
+	// Debug WriteLn('ParseNumberLiteral');
+	lNumberLiteral := TNumberLiteralNode.Create(aPrevious);
+	lNumberLiteral.IsFloat := True;
 	Mark(lNumberLiteral);
 	lNumberLiteral.Value := fSource.Extract(tkExprLiteralNumber);
 	// Debug WriteLn(lNumberLiteral.Value);

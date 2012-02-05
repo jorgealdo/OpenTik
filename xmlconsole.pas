@@ -54,6 +54,7 @@ Begin
 				gCommandLoader.ClassFactory.Register('print', TPrintCommand);
 				gCommandLoader.ClassFactory.Register('list', TListCommand);
 				gCommandLoader.ClassFactory.Register('template', TParseTemplate);
+				gCommandLoader.ClassFactory.Register('add', TAddCommand);
 				gCommandLoader.DoLoadCommand(gCommandLine, gStack);
 				gCommandLoader.Evaluate;
 			Finally
