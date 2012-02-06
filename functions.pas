@@ -35,6 +35,7 @@ Type
 		Procedure FuncGetText(Var aMessage); Message 'gettext';
 		Procedure FuncGetNodeName(Var aMessage); Message 'getnodename';
 		Procedure FuncGetNodeNumber(Var aMessage); Message 'getnodenumber';
+		Procedure FuncConcat(Var aMessage); Message 'concat';
 	End;
 
 Implementation
@@ -97,6 +98,16 @@ End;
 Procedure TNodeFunctions.FuncGetNodeNumber(Var aMessage);
 Begin
 	Stack.Top.Push(Stack.Focused.GetCurrentIndex);
+End;
+
+Procedure TNodeFunctions.FuncConcat(Var aMessage);
+Var
+	lCount : Integer;
+	lResult : String;
+Begin
+	lResult := '';
+	While Stack.Top.Count > 0 Do
+		AppendStr(lResult, Stack.Top.Pop);
 End;
 
 End.
