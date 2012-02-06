@@ -47,6 +47,8 @@ Type
 		Function AsXML: String; Virtual;
 		Function AsClosingXML: String; Virtual;
 		Procedure RaiseError(Message : String);
+		Procedure OnBeforeGetProperty; Virtual;
+		Procedure OnAfterSetProperty; Virtual;
 		Property Text : String Read GetTextChild Write SetTextChild;
 		Property Row : Integer Read fRow Write fRow;
 		Property Col : Integer Read fCol Write fCol;
@@ -164,6 +166,26 @@ Begin
 	lException.Row := fRow;
 	lException.Col := fCol;
 	Raise lException;
+End;
+
+Procedure TXMLNode.OnBeforeGetProperty;
+Begin
+	First;
+	While Not IsAfterLast Do
+	Begin
+		(GetCurrent As TXMLNode).OnBeforeGetProperty;
+		Next;
+	End;
+End;
+
+Procedure TXMLNode.OnAfterSetProperty;
+Begin
+	First;
+	While Not IsAfterLast Do
+	Begin
+		(GetCurrent As TXMLNode).OnAfterSetProperty;
+		Next;
+	End;
 End;
 
 // TXMLSpecialTag1Node
