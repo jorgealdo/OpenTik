@@ -50,6 +50,7 @@ Begin
 			Write(gStack.Focused.IndexedName, '>');
 			ReadLn(gCommandLine);
 			Try	
+				gConfig.OnBeforeGetProperty;
 				gCommandLoader := TCmdRootNode.Create(Nil);
 				gCommandLoader.ClassFactory.Register('print', TPrintCommand);
 				gCommandLoader.ClassFactory.Register('list', TListCommand);
@@ -57,6 +58,7 @@ Begin
 				gCommandLoader.ClassFactory.Register('add', TAddCommand);
 				gCommandLoader.DoLoadCommand(gCommandLine, gStack);
 				gCommandLoader.Evaluate;
+				gConfig.OnAfterSetProperty;
 			Finally
 				FreeAndNil(gCommandLoader);
 			End;
